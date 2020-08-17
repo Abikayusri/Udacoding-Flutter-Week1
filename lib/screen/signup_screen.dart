@@ -1,6 +1,5 @@
 import 'package:assignment_week1/screen/signin_screen.dart';
 import 'package:assignment_week1/utils/constant.dart';
-import 'package:assignment_week1/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,13 +8,7 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> with Validation {
-  final formKey = GlobalKey<FormState>();
-
-  String name = "";
-  String email = "";
-  String password = "";
-
+class _SignupScreenState extends State<SignupScreen> {
   Widget _buildFullName() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +38,6 @@ class _SignupScreenState extends State<SignupScreen> with Validation {
               hintText: 'Enter your full name',
               hintStyle: kHintTextStyle,
             ),
-            validator: validateName,
           ),
         ),
       ],
@@ -81,7 +73,6 @@ class _SignupScreenState extends State<SignupScreen> with Validation {
               hintText: 'Enter your email',
               hintStyle: kHintTextStyle,
             ),
-            validator: validateEmail,
           ),
         ),
       ],
@@ -117,7 +108,6 @@ class _SignupScreenState extends State<SignupScreen> with Validation {
               hintText: 'Enter your Password',
               hintStyle: kHintTextStyle,
             ),
-            validator: validatePassword,
           ),
         ),
       ],
@@ -131,13 +121,8 @@ class _SignupScreenState extends State<SignupScreen> with Validation {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SigninScreen()));
-//          if (formKey.currentState.validate()) {
-//            Navigator.push(context,
-//                MaterialPageRoute(builder: (context) => SigninScreen()));
-//          }
-
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SigninScreen()));
           print('Register Button Pressed');
         },
         padding: EdgeInsets.all(15.0),
@@ -194,7 +179,6 @@ class _SignupScreenState extends State<SignupScreen> with Validation {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
-          key: formKey,
           onTap: () => FocusScope.of(context).unfocus(),
           child: Stack(
             children: <Widget>[
